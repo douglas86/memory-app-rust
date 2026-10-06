@@ -1,6 +1,6 @@
-[package]
+[workspace]
+resolver = "3"
 name = "memory-app-rust"
 version = "0.1.0"
 edition = "2024"
-
-[dependencies]
+members = ["adder"]
