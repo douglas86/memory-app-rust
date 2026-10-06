@@ -3,4 +3,6 @@ resolver = "3"
 name = "memory-app-rust"
 version = "0.1.0"
 edition = "2024"
-members = ["adder"]
+members = ["add_one", "adder"]
+
+
