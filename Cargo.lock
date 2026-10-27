@@ -7,8 +7,5 @@ name = "add_one"
 version = "0.1.0"
 
 [[package]]
-name = "adder"
+name = "client"
 version = "0.1.0"
-dependencies = [
- "add_one",
-]
