@@ -1,5 +1,6 @@
 use iced::widget::{Column, button, column, text};
 
+#[derive(Default)]
 struct Counter {
     value: u8,
 }
@@ -23,8 +24,10 @@ impl Counter {
     }
 
     fn view(&self) -> Column<'_, Msg> {
+
+
         let increment = button("+").on_press(Msg::Increment);
-        let decrement = button("-").on_press(Msg::Decrement);
+        let decrement = button("-").on_press_maybe((self.value > 0).then_some(Msg::Decrement));
 
         let counter = text(self.value);
 
@@ -34,8 +37,8 @@ impl Counter {
     }
 }
 
-fn main() {
-    println!("Hello, world!");
+fn main() -> iced::Result {
+    iced::run(Counter::update, Counter::view)
 }
 
 #[cfg(test)]
