@@ -29,7 +29,8 @@ cargo add iced -p client
 |-- Cargo.toml
 |-- src
     |-- main.rs
-|-- adder/
+|-- client/
+    |-- main.rs # Runs the main iced interface with increment and decrement buttons
 |-- add_one/
 ```
 
