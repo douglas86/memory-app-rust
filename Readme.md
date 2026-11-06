@@ -21,6 +21,9 @@ This adds the iced toolkit to the client workspace
 cargo add iced -p client
 ```
 
+[Tutorial](https://book.iced.rs/first-steps.html) to get a simple increment and decrement button to work with the iced
+toolkit
+
 ---
 
 ## [Project Structure](#table-of-content)
