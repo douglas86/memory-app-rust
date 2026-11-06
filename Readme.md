@@ -1,7 +1,28 @@
 # Table of Content
 
+- [Setting up iced](#setting-up-iced)
+
 1. [Project Structure](#project-structure)
 2. [Credits](#credits)
+
+---
+
+## [Setting up iced](#table-of-content)
+
+This creates a new workspace called client
+
+```bash
+cargo new client
+```
+
+This adds the iced toolkit to the client workspace
+
+```bash
+cargo add iced -p client
+```
+
+[Tutorial](https://book.iced.rs/first-steps.html) to get a simple increment and decrement button to work with the iced
+toolkit
 
 ---
 
@@ -11,7 +32,8 @@
 |-- Cargo.toml
 |-- src
     |-- main.rs
-|-- adder/
+|-- client/
+    |-- main.rs # Runs the main iced interface with increment and decrement buttons
 |-- add_one/
 ```
 
