@@ -2,6 +2,7 @@
 
 - [Setting up iced](#setting-up-iced)
   [Setting up Axum](#setting-up-axum)
+  [Setting up Surreal DB](#setting-up-surreal-db)
 
 1. [Project Structure](#project-structure)
 2. [Credits](#credits)
@@ -42,10 +43,42 @@ cargo add axum -p server
 cargo add tokio --features full -p server
 ```
 
-[Totorial](https://www.rustfinity.com/blog/axum-rust-tutorial) to get a simple get and post request for a hello world
+[Tutorial](https://www.rustfinity.com/blog/axum-rust-tutorial) to get a simple get and post request for a hello world
 program
 
 create a file call test.http this is where all the tests sit for the http requests
+
+---
+
+## [Setting up surreal DB](#table-of-content)
+
+### Installing Podman
+
+Development Setup: Podman on Windows
+
+### 1. Installations
+
+Install the official Podman CLI toolchain via Windows Package Manager:
+
+```powershell
+winget install Redhat.Podman
+```
+
+Note: If Podman is not recognized immediately after installation, ensure is added to Path
+
+```powershell
+[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";C:\Program Files\RedHat\Podman", "User")
+```
+
+Restart your terminal session after updating environment variables.
+
+Run the following commands to download and install as well as test podman
+
+```powershell
+podman machine init
+podman machine start
+podman machine list
+```
 
 ---
 
