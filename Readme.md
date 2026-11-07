@@ -34,6 +34,10 @@ toolkit
     |-- main.rs
 |-- client/
     |-- main.rs # Runs the main iced interface with increment and decrement buttons
+|-- server/
+    |-- src/
+        |-- main.rs # Runs a simple get and post request from the home route
+    |-- test.http # Test Get and Post route from home path
 |-- add_one/
 ```
 
