@@ -1,0 +1,7 @@
+@host = http://localhost:3000
+
+### Test Root Endpoint
+GET {{host}}
+
+### Test Root Endpoint
+POST {{host}}
