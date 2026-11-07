@@ -1,5 +1,7 @@
-### Test Root Endpoint
-GET http://localhost:3000
+@host = http://localhost:3000
 
 ### Test Root Endpoint
-GET http://localhost:3000
+GET {{host}}
+
+### Test Root Endpoint
+POST {{host}}
