@@ -33,3 +33,20 @@ impl App {
         interface
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::App;
+    use crate::app::Msg;
+
+    #[test]
+    fn test_it_counts_properly() {
+        let mut counter = App { value: 0 };
+
+        counter.app_update(Msg::Increment);
+        counter.app_update(Msg::Increment);
+        counter.app_update(Msg::Decrement);
+
+        assert_eq!(counter.value, 1);
+    }
+}
