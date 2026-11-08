@@ -1,36 +1,69 @@
-use iced::widget::{Column, button, column, text};
+use iced::widget::{Column, button, container, text};
+use iced::{Alignment, Length};
+use iced::{Color, Element};
 
 #[derive(Default)]
 pub struct App {
-    value: u8,
+    show_modal: bool,
 }
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone)]
 pub enum Msg {
-    Increment,
-    Decrement,
+    OpenModal,
+    CloseModal,
 }
 
 impl App {
     pub fn app_update(&mut self, message: Msg) {
         match message {
-            Msg::Increment => {
-                self.value += 1;
+            Msg::OpenModal => {
+                self.show_modal = true;
             }
-            Msg::Decrement => {
-                self.value -= 1;
+            Msg::CloseModal => {
+                self.show_modal = false;
             }
         }
     }
 
-    pub fn app_view(&self) -> Column<'_, Msg> {
-        let increment = button("+").on_press(Msg::Increment);
-        let decrement = button("-").on_press_maybe((self.value > 0).then_some(Msg::Decrement));
+    pub fn app_view(&self) -> Element<'_, Msg> {
+        //creates the model
+        let modal = container(
+            Column::new()
+                .spacing(20)
+                .align_x(Alignment::Center)
+                .push(text!("Create New Model").size(24))
+                .push(button("Close").on_press(Msg::CloseModal)),
+        )
+        .padding(20)
+        .style(|_theme| container::Style {
+            background: Some(iced::Background::Color(Color::from_rgb8(35, 38, 45))),
+            border: iced::Border {
+                radius: 10.0.into(),
+                width: 1.0,
+                color: Color::from_rgb8(60, 65, 75),
+            },
+            ..container::Style::default()
+        });
 
-        let counter = text(self.value);
+        // model that is needing to be displayed
+        let main_content = container(modal)
+            .width(Length::Fill)
+            .height(Length::Fill)
+            .center_x(Length::Fill)
+            .center_y(Length::Fill)
+            .style(|_theme| container::Style {
+                background: Some(iced::Background::Color(Color::from_rgba(
+                    0.0, 0.0, 0.0, 0.6,
+                ))),
+                ..container::Style::default()
+            });
 
-        let interface = column![increment, counter, decrement];
+        // show model only if variable true
+        if !self.show_modal {
+            return main_content.into();
+        }
 
-        interface
+        // TODO: Create the main content here
+        // TODO: The above code is all todo with the modal
     }
 }
 
