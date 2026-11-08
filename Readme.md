@@ -72,12 +72,19 @@ Note: If Podman is not recognized immediately after installation, ensure is adde
 
 Restart your terminal session after updating environment variables.
 
-Run the following commands to download and install as well as test podman
+Run the following commands to download and install as well as test Podman
 
 ```powershell
 podman machine init
 podman machine start
 podman machine list
+```
+
+At the start of every new session in the morning run the following commands to start Podman
+
+```powershell
+podman machine start
+podman start surrealdb
 ```
 
 ---
