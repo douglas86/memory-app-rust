@@ -61,3 +61,30 @@ impl Modal {
             .into()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_modal_default_is_closed() {
+        let modal = Modal::default();
+        assert_eq!(modal.show_modal, false);
+    }
+
+    #[test]
+    fn test_modal_update_state() {
+        let mut modal = Modal::default();
+
+        modal.modal_update(MsgModal::CloseModal);
+        assert_eq!(modal.show_modal, false);
+    }
+
+    #[test]
+    fn test_modal_update_state_is_open() {
+        let mut modal = Modal::default();
+
+        modal.modal_update(MsgModal::OpenModal);
+        assert_eq!(modal.show_modal, true);
+    }
+}
