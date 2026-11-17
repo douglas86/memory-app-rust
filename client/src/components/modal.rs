@@ -87,4 +87,29 @@ mod tests {
         modal.modal_update(MsgModal::OpenModal);
         assert_eq!(modal.show_modal, true);
     }
+
+    #[test]
+    fn test_model_view_construction() {
+        let model_closed = Modal::default();
+        let model_open = Modal { show_modal: false };
+
+        let _closed_element = model_closed.modal_view();
+        let _open_element = model_open.modal_view();
+    }
+
+    #[test]
+    fn test_modal_open_and_close_lifecycle() {
+        let mut modal = Modal::default();
+
+        // Initial state: Modal is closed
+        assert_eq!(modal.show_modal, false);
+
+        // User clicks the "Open" button (triggers MsgModal::OpenModal)
+        modal.modal_update(MsgModal::OpenModal);
+        assert_eq!(modal.show_modal, true);
+
+        // User clicks the "Close" button inside the modal (triggers MsgModal::CloseModal)
+        modal.modal_update(MsgModal::CloseModal);
+        assert_eq!(modal.show_modal, false);
+    }
 }
