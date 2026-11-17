@@ -91,7 +91,7 @@ mod tests {
     #[test]
     fn test_model_view_construction() {
         let model_closed = Modal::default();
-        let model_open = Modal { show_modal: false };
+        let model_open = Modal { show_modal: true };
 
         let _closed_element = model_closed.modal_view();
         let _open_element = model_open.modal_view();
