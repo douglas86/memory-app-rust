@@ -1,8 +1,8 @@
 # Table of Content
 
 - [Setting up iced](#setting-up-iced)
-  [Setting up Axum](#setting-up-axum)
-  [Setting up Surreal DB](#setting-up-surreal-db)
+- [Setting up Axum](#setting-up-axum)
+- [Setting up Surreal DB](#setting-up-surreal-db)
 
 1. [Project Structure](#project-structure)
 2. [Credits](#credits)
@@ -97,6 +97,10 @@ podman start surrealdb
     |-- main.rs
 |-- client/
     |-- main.rs # Runs the main iced interface with increment and decrement buttons
+    |-- app.rs # Main entry point into application
+    |-- components/
+        |-- mod.rs # Give right of passage for main.rs file into components directory
+        |-- modal.rs # Controls the flow of whenever a modal is called
 |-- server/
     |-- src/
         |-- main.rs # Runs a simple get and post request from the home route
