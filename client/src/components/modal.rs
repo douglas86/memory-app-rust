@@ -38,7 +38,7 @@ impl Modal {
         )
         .padding(20)
         .style(|_theme| container::Style {
-            background: Some(iced::Background::Color(Color::from_rgb8(35, 38, 45))),
+            background: Some(iced::Background::Color(Color::from_rgb8(52, 235, 149))),
             border: iced::Border {
                 radius: 10.0.into(),
                 width: 1.0,
