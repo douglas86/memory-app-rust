@@ -1,8 +1,8 @@
 # Table of Content
 
 - [Setting up iced](#setting-up-iced)
-  [Setting up Axum](#setting-up-axum)
-  [Setting up Surreal DB](#setting-up-surreal-db)
+- [Setting up Axum](#setting-up-axum)
+- [Setting up Surreal DB](#setting-up-surreal-db)
 
 1. [Project Structure](#project-structure)
 2. [Credits](#credits)
