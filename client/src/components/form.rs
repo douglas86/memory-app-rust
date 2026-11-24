@@ -3,10 +3,14 @@
 //! Provides the UI layout and handles all form data
 
 use iced::Element;
+use std::path::PathBuf;
 
 #[derive(Default)]
 pub struct Form {
-    username: String,
+    title: String,
+    image: Option<PathBuf>,
+    description: String,
+    tags: Vec<String>,
 }
 
 #[derive(Debug, Clone)]
