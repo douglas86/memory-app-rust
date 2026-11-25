@@ -2,18 +2,21 @@
 //!
 //! Provides the UI dialog overlay and state handler for user model
 
+use crate::components::form::{Form, MsgForm};
 use iced::widget::{Column, button, container, text};
 use iced::{Alignment, Color, Element, Length};
 
 #[derive(Default)]
 pub struct Modal {
     pub show_modal: bool,
+    form: Form,
 }
 
 #[derive(Debug, Clone)]
 pub(crate) enum MsgModal {
     OpenModal,  // Opens the model when called
     CloseModal, // Closed the model when called
+    Form(MsgForm),
 }
 
 impl Modal {
@@ -34,8 +37,11 @@ impl Modal {
                 .spacing(20)
                 .align_x(Alignment::Center)
                 .push(text!("Create New Modal").size(24))
+                .push(self.form.form_view().map(MsgModal::Form))
                 .push(button("close").on_press(MsgModal::CloseModal)),
         )
+        .width(Length::Fill)
+        .max_width(500.0)
         .padding(20)
         .style(|_theme| container::Style {
             background: Some(iced::Background::Color(Color::from_rgb8(52, 235, 149))),
@@ -91,7 +97,10 @@ mod tests {
     #[test]
     fn test_model_view_construction() {
         let model_closed = Modal::default();
-        let model_open = Modal { show_modal: true };
+        let model_open = Modal {
+            show_modal: true,
+            form: Default::default(),
+        };
 
         let _closed_element = model_closed.modal_view();
         let _open_element = model_open.modal_view();
