@@ -16,18 +16,24 @@ pub struct Form {
 }
 
 #[derive(Debug, Clone)]
-pub(crate) enum MsgForm {}
+pub(crate) enum MsgForm {
+    TitleChanged(String),
+}
 
 impl Form {
-    pub fn form_update(&mut self, _message: MsgForm) {}
+    pub fn form_update(&mut self, message: MsgForm) {
+        match message {
+            MsgForm::TitleChanged(title) => {
+                self.title = title;
+                println!("Title: {}", self.title);
+            }
+        }
+    }
 
     pub fn form_view(&self) -> Element<'_, MsgForm> {
-        let form = container(
-            Column::new()
-                .spacing(20)
-                .align_x(Alignment::Center)
-                .push(text_input("Type something here...", &self.title)),
-        );
+        let form = container(Column::new().spacing(20).align_x(Alignment::Center).push(
+            text_input("Type something here...", &self.title).on_input(MsgForm::TitleChanged),
+        ));
 
         container(form).into()
     }

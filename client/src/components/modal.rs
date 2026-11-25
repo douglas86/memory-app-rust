@@ -28,6 +28,7 @@ impl Modal {
             MsgModal::CloseModal => {
                 self.show_modal = false;
             }
+            MsgModal::Form(form) => self.form.form_update(form),
         }
     }
 
