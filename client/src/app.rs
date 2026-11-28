@@ -1,6 +1,6 @@
 use crate::components::modal::{Modal, MsgModal};
 use iced::widget::{Column, button, container, stack};
-use iced::{Alignment, Color, Element, Length};
+use iced::{Alignment, Color, Element, Length, Task};
 
 #[derive(Default)]
 pub struct App {
@@ -12,9 +12,9 @@ pub enum Msg {
 }
 
 impl App {
-    pub fn app_update(&mut self, message: Msg) {
+    pub fn app_update(&mut self, message: Msg) -> Task<Msg> {
         match message {
-            Msg::Modal(msg) => self.modal.modal_update(msg),
+            Msg::Modal(msg) => self.modal.modal_update(msg).map(Msg::Modal),
         }
     }
 
