@@ -96,7 +96,7 @@ mod tests {
     fn test_modal_update_state() {
         let mut modal = Modal::default();
 
-        modal.modal_update(MsgModal::CloseModal);
+        let _ = modal.modal_update(MsgModal::CloseModal);
         assert_eq!(modal.show_modal, false);
     }
 
@@ -104,7 +104,7 @@ mod tests {
     fn test_modal_update_state_is_open() {
         let mut modal = Modal::default();
 
-        modal.modal_update(MsgModal::OpenModal);
+        let _ = modal.modal_update(MsgModal::OpenModal);
         assert_eq!(modal.show_modal, true);
     }
 
@@ -128,11 +128,11 @@ mod tests {
         assert_eq!(modal.show_modal, false);
 
         // User clicks the "Open" button (triggers MsgModal::OpenModal)
-        modal.modal_update(MsgModal::OpenModal);
+        let _ = modal.modal_update(MsgModal::OpenModal);
         assert_eq!(modal.show_modal, true);
 
         // User clicks the "Close" button inside the modal (triggers MsgModal::CloseModal)
-        modal.modal_update(MsgModal::CloseModal);
+        let _ = modal.modal_update(MsgModal::CloseModal);
         assert_eq!(modal.show_modal, false);
     }
 }
