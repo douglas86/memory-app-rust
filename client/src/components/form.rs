@@ -7,7 +7,7 @@ use iced::widget::{Column, button, container, text_input};
 use iced::{Color, Element, Task};
 use std::path::PathBuf;
 
-#[derive(Default)]
+#[derive(Default, Debug, Clone)]
 pub struct Form {
     title: String,
     image: Option<PathBuf>,
@@ -66,6 +66,10 @@ impl Form {
             .await;
 
         file.map(|f| f.path().to_path_buf())
+    }
+
+    pub fn return_form_data(&self) -> &Self {
+        self
     }
 
     pub fn form_view(&self) -> Element<'_, MsgForm> {

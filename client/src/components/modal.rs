@@ -16,6 +16,7 @@ pub struct Modal {
 pub(crate) enum MsgModal {
     OpenModal,  // Opens the model when called
     CloseModal, // Closed the model when called
+    Submit,     // Submit the data from model
     Form(MsgForm),
 }
 
@@ -32,6 +33,13 @@ impl Modal {
 
                 Task::none()
             }
+            MsgModal::Submit => {
+                self.show_modal = false;
+                let f = self.form.return_form_data();
+                println!("{:?}", f);
+
+                Task::none()
+            }
             MsgModal::Form(form) => self.form.form_update(form).map(MsgModal::Form),
         }
     }
@@ -43,6 +51,7 @@ impl Modal {
                 .align_x(Alignment::Center)
                 .push(text!("Create New Modal").size(24))
                 .push(self.form.form_view().map(MsgModal::Form))
+                .push(button("Submit").on_press(MsgModal::Submit))
                 .push(button("close").on_press(MsgModal::CloseModal)),
         )
         .width(Length::Fill)
