@@ -30,13 +30,17 @@ impl Modal {
             }
             MsgModal::CloseModal => {
                 self.show_modal = false;
+                self.form = Form::default();
 
                 Task::none()
             }
             MsgModal::Submit => {
                 self.show_modal = false;
+
                 let f = self.form.return_form_data();
                 println!("{:?}", f);
+
+                self.form = Form::default();
 
                 Task::none()
             }
