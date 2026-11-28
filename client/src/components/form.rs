@@ -2,9 +2,8 @@
 //!
 //! Provides the UI layout and handles all form data
 
-use iced::widget::text::Alignment;
-use iced::widget::{Column, button, container, text_input};
-use iced::{Color, Element, Task};
+use iced::widget::{Column, Row, button, container, text, text_input};
+use iced::{Alignment, Color, Element, Task};
 use std::path::PathBuf;
 
 #[derive(Default, Debug, Clone)]
@@ -73,6 +72,40 @@ impl Form {
     }
 
     pub fn form_view(&self) -> Element<'_, MsgForm> {
+        let image_picker = Row::new()
+            .push(
+                button("Select Image")
+                    .on_press(MsgForm::OpenImagePicker)
+                    .style(|_theme, _status| button::Style {
+                        background: Some(iced::Background::Color(Color::from_rgb8(19, 82, 36))),
+                        text_color: Color::WHITE,
+                        border: iced::Border {
+                            radius: 6.0.into(),
+                            ..iced::Border::default()
+                        },
+                        ..button::Style::default()
+                    }),
+            )
+            .push(text(
+                self.image
+                    .as_deref()
+                    .and_then(|f| {
+                        let truncate_at_character = 20;
+                        let name = f.file_name()?.to_str()?;
+
+                        if name.chars().count() > truncate_at_character {
+                            let truncate =
+                                name.chars().take(truncate_at_character).collect::<String>();
+                            Some(format!("{}...", truncate))
+                        } else {
+                            Some(name.to_string())
+                        }
+                    })
+                    .unwrap_or("No image selected".to_string()),
+            ))
+            .align_y(Alignment::Center)
+            .spacing(8);
+
         let form = container(
             Column::new()
                 .spacing(20)
@@ -86,19 +119,7 @@ impl Form {
                     text_input("Tags (comma-separated)...", &self.tags)
                         .on_input(MsgForm::TagChanged),
                 )
-                .push(
-                    button("Select Image")
-                        .on_press(MsgForm::OpenImagePicker)
-                        .style(|_theme, _status| button::Style {
-                            background: Some(iced::Background::Color(Color::from_rgb8(19, 82, 36))),
-                            text_color: Color::WHITE,
-                            border: iced::Border {
-                                radius: 6.0.into(),
-                                ..iced::Border::default()
-                            },
-                            ..button::Style::default()
-                        }),
-                ),
+                .push(image_picker),
         );
 
         container(form).into()
