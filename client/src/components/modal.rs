@@ -3,7 +3,7 @@
 //! Provides the UI dialog overlay and state handler for user model
 
 use crate::components::form::{Form, MsgForm};
-use iced::widget::{Column, button, container, text};
+use iced::widget::{Column, Row, button, container, text};
 use iced::{Alignment, Color, Element, Length, Task};
 
 #[derive(Default)]
@@ -45,14 +45,42 @@ impl Modal {
     }
 
     pub fn modal_view(&self) -> Element<'_, MsgModal> {
+        let buttons = Row::new()
+            .push(
+                button("Submit")
+                    .on_press(MsgModal::Submit)
+                    .style(|_theme, _status| button::Style {
+                        background: Some(iced::Background::Color(Color::from_rgb8(179, 196, 26))),
+                        text_color: Color::WHITE,
+                        border: iced::Border {
+                            radius: 6.0.into(),
+                            ..iced::Border::default()
+                        },
+                        ..button::Style::default()
+                    }),
+            )
+            .push(
+                button("Close")
+                    .on_press(MsgModal::CloseModal)
+                    .style(|_theme, _status| button::Style {
+                        background: Some(iced::Background::Color(Color::from_rgb8(34, 13, 189))),
+                        text_color: Color::WHITE,
+                        border: iced::Border {
+                            radius: 6.0.into(),
+                            ..iced::Border::default()
+                        },
+                        ..button::Style::default()
+                    }),
+            )
+            .spacing(20);
+
         let model_box = container(
             Column::new()
                 .spacing(20)
                 .align_x(Alignment::Center)
                 .push(text!("Create New Modal").size(24))
                 .push(self.form.form_view().map(MsgModal::Form))
-                .push(button("Submit").on_press(MsgModal::Submit))
-                .push(button("close").on_press(MsgModal::CloseModal)),
+                .push(buttons),
         )
         .width(Length::Fill)
         .max_width(500.0)
