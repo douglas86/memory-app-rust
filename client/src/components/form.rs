@@ -57,20 +57,6 @@ impl Form {
         }
     }
 
-    async fn pick_image() -> Option<PathBuf> {
-        let file = rfd::AsyncFileDialog::new()
-            .add_filter("*.png", &["png", "png", "jpg", "jpeg"])
-            .set_directory("/")
-            .pick_file()
-            .await;
-
-        file.map(|f| f.path().to_path_buf())
-    }
-
-    pub fn return_form_data(&self) -> &Self {
-        self
-    }
-
     pub fn form_view(&self) -> Element<'_, MsgForm> {
         let image_picker = Row::new()
             .push(
@@ -123,5 +109,19 @@ impl Form {
         );
 
         container(form).into()
+    }
+
+    pub fn return_form_data(&self) -> &Self {
+        self
+    }
+
+    async fn pick_image() -> Option<PathBuf> {
+        let file = rfd::AsyncFileDialog::new()
+            .add_filter("*.png", &["png", "jpg", "jpeg"])
+            .set_directory("/")
+            .pick_file()
+            .await;
+
+        file.map(|f| f.path().to_path_buf())
     }
 }
