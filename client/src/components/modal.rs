@@ -4,7 +4,7 @@
 
 use crate::components::form::{Form, MsgForm};
 use iced::widget::{Column, button, container, text};
-use iced::{Alignment, Color, Element, Length};
+use iced::{Alignment, Color, Element, Length, Task};
 
 #[derive(Default)]
 pub struct Modal {
@@ -24,17 +24,19 @@ pub(crate) enum MsgModal {
 // TODO: submit button will only print to console for now
 
 impl Modal {
-    pub fn modal_update(&mut self, message: MsgModal) {
+    pub fn modal_update(&mut self, message: MsgModal) -> Task<MsgModal> {
         match message {
             MsgModal::OpenModal => {
                 self.show_modal = true;
+
+                Task::none()
             }
             MsgModal::CloseModal => {
                 self.show_modal = false;
+
+                Task::none()
             }
-            MsgModal::Form(form) => {
-                self.form.form_update(form);
-            }
+            MsgModal::Form(form) => self.form.form_update(form).map(MsgModal::Form),
         }
     }
 
