@@ -19,6 +19,10 @@ pub(crate) enum MsgModal {
     Form(MsgForm),
 }
 
+// TODO: Fix compiler error and wire up the image picker to the modal
+// TODO: before finishing off the card wire up the submit button in the modal
+// TODO: submit button will only print to console for now
+
 impl Modal {
     pub fn modal_update(&mut self, message: MsgModal) {
         match message {
@@ -28,7 +32,9 @@ impl Modal {
             MsgModal::CloseModal => {
                 self.show_modal = false;
             }
-            MsgModal::Form(form) => self.form.form_update(form),
+            MsgModal::Form(form) => {
+                self.form.form_update(form);
+            }
         }
     }
 

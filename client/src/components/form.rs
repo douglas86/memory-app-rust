@@ -68,6 +68,9 @@ impl Form {
         file.map(|f| f.path().to_path_buf())
     }
 
+    // TODO: The images picker seems to be working in for form.rs file without any errors
+    // TODO: The next step is to wire it up to the modal section
+
     pub fn form_view(&self) -> Element<'_, MsgForm> {
         let form = container(
             Column::new()
